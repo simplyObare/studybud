@@ -1,0 +1,12 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <form action="" method="post">
+    {% csrf_token %}
+    <p>Are you sure you want to delete {{obj}}?</p>
+    <small>This action cannot be undone.</small>
+
+    <a href="{{request.META.HTTP_REFERER}}">Go back</a>
+    <button type="submit">Confirm</button>
+  </form>
+</div>
+{% endblock %}
