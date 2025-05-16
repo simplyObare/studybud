@@ -1,3 +1,13 @@
-<a href="/">Logo</a>
+<a href="/"><h1>Logo</h1></a>
+
+<form action="{% url 'home' %}" method="get">
+  <input
+    type="text"
+    name="q"
+    placeholder="Search rooms..."
+    value="{{ request.GET.q }}"
+  />
+  <button type="submit">Search</button>
+</form>
 
 <hr />
