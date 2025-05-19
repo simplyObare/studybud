@@ -1,11 +1,39 @@
 {% extends "base.html" %} {% block content %}
-<div>
-  <form action="" method="post">
-    {% csrf_token %}
-    <h1>Create Room</h1>
-    {{form.as_p}}
+<div class="grid place-items-center">
+  {% load widget_tweaks %}
+  <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+    <legend class="fieldset-legend text-primary">Create/Update Study Room</legend>
+    <form action="" method="post">
+      {% csrf_token %}
+      <div class="mb-4">
+        <label for="room_topic" class="block mb-1 font-semibold">Room Topic</label>
 
-    <button type="submit">Submit</button>
-  </form>
+        <input type="text" class="input" placeholder="My Room Topic" value="{{room.topic.name}}" name="topic" list="topic-list" required />
+        <datalist id="topic-list">
+          <select name="" id="room_topic">
+            {% for topic in topics %}
+            <option value="{{topic.name}}">{{topic.name}}</option>
+            {% endfor %}
+          </select>
+        </datalist>
+      </div>
+
+      <div class="mb-4">
+        <label for="room_name" class="block mb-1 font-semibold">Room Name</label>
+        <div>{{ form.name|add_class:"input input-bordered w-full"|attr:"placeholder:My Roome Name..." }}</div>
+      </div>
+
+      <div class="mb-4">
+        <label for="room_description" class="block mb-1 font-semibold">Room Description</label>
+        {{ form.description|add_class:"textarea h-24"|attr:"placeholder:My Room Description..." }}
+        <div class="label">Optional</div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 mt-6">
+        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-soft btn-primary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </fieldset>
 </div>
 {% endblock %}

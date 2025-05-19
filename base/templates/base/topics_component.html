@@ -1,12 +1,23 @@
-<h3>Browse Topics</h3>
-<hr />
+<ul class="list bg-base-100">
+  <li class="p-4 pb-2 text-lg font-semibold font-sans opacity-60 tracking-wide">
+    <h3>Browse Topics</h3>
+  </li>
 
-<div>
-  <a href="{% url 'home' %}">All</a>
-</div>
+  <li class="list-row">
+    <div class="list-col-grow">
+      <div class="text-xs hover:text-primary font-semibold opacity-60">
+        <a href="{% url 'home' %}">All</a>
+      </div>
+    </div>
+  </li>
 
-{% for topic in topics %}
-<div>
-  <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
-</div>
-{% endfor %}
+  {% for topic in topics %}
+  <li class="list-row">
+    <div class="list-col-grow">
+      <div class="text-xs hover:text-primary font-semibold opacity-60">
+        <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>

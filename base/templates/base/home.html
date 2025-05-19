@@ -1,23 +1,25 @@
 {% extends "base.html" %} {% block content %}
 
-<style>
-  .home-container {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    gap: 30px;
-  }
-</style>
-
-<div class="home-container">
+<div class="home-container grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8">
   <div>{% include "base/topics_component.html" %}</div>
-
   <div>
-    <h5>{{room_count}} rooms available</h5>
+    <div class="mt-6 mb-10 flex items-center justify-between">
+      <div>
+        <h1 class="uppercase font-semibold">Study Room</h1>
+        <h5 class="opacity-60 font-semibold text-xs">{{room_count}} Rooms available</h5>
+      </div>
 
-    <a href="{% url 'create-room' %}">Create Room</a>
-    {% include "base/feed_component.html" %}
+      <a class="btn btn-primary" href="{% url 'create-room' %}"
+        ><span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        </span>
+        <p>Create Room</p>
+      </a>
+    </div>
+    <div>{% include "base/feed_component.html" %}</div>
   </div>
-
   <div>{% include "base/activity_component.html" %}</div>
 </div>
 {% endblock %}
