@@ -1,25 +1,49 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="home-container grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8">
-  <div>{% include "base/topics_component.html" %}</div>
-  <div>
-    <div class="mt-6 mb-10 flex items-center justify-between">
-      <div>
-        <h1 class="uppercase font-semibold">Study Room</h1>
-        <h5 class="opacity-60 font-semibold text-xs">{{room_count}} Rooms available</h5>
+<div class="home-container grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8 mb-4">
+  <div class="hidden lg:block">{% include "base/topics_component.html" %}</div>
+  <div class="px-4">
+    <div>
+      <div class='grid md:hidden lg:hidden place-items-center gap-5 mb-6 bg-base-300 px-4 py-10 rounded-t-xl'>
+        <form action="{% url 'home' %}" method="get"">
+          <label class="input border border-primary text-primary w-[16rem] sm:w-[20rem]">
+            <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input type="text" name="q" placeholder="Search rooms..." class="w-full" />
+          </label>
+        </form>
+  
+        <div class='flex items-center gap-2 justify-center'>
+          <a href='{% url "topics" %}' class="btn btn-outline btn-primary p-3 rounded-full">Browse Topics</a>
+          <a href='{% url "activity" %}' class="btn btn-outline btn-primary p-3 rounded-full">Recent Activites</a>
+        </div>
       </div>
 
-      <a class="btn btn-primary" href="{% url 'create-room' %}"
-        ><span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-          </svg>
-        </span>
-        <p>Create Room</p>
-      </a>
+      <div class="mt-2 mb-10 flex items-center justify-between">
+        <div>
+          <h1 class="uppercase font-semibold">Study Room</h1>
+          <h5 class="opacity-60 font-semibold text-xs">{{room_count}} Rooms available</h5>
+        </div>
+  
+        <a class="btn btn-primary" href="{% url 'create-room' %}"
+          ><span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </span>
+          <p>Create Room</p>
+        </a>
+      </div>
     </div>
+    
+
+    
     <div>{% include "base/feed_component.html" %}</div>
   </div>
-  <div>{% include "base/activity_component.html" %}</div>
+  <div class="hidden lg:block ">{% include "base/activity_component.html" %}</div>
 </div>
 {% endblock %}

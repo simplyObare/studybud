@@ -1,49 +1,36 @@
 {% extends "base.html" %} {% block content %}
 
-<div
-  class="profile-container grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8"
->
-  <div>{% include "base/topics_component.html" %}</div>
-  <div>
+<div class="profile-container grid grid-cols-1 lg:grid-cols-[1fr_3fr_1fr] gap-8">
+  <div class="hidden lg:block">{% include "base/topics_component.html" %}</div>
+  <div class="m-4">
     <div>
-      <div
-        class="avatar-main-container grid grid-cols-1 gap-3 p-8 place-items-center"
-      >
+      <div class="avatar-main-container grid grid-cols-1 gap-3 p-8 place-items-center">
         <div class="avatar">
-          <div
-            class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2"
-          >
-            <img
-              src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-            />
+          <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
+            <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
           </div>
         </div>
 
         <h1>Full Name</h1>
         <h2 class="text-primary">@{{user.username}}</h2>
-        <a href=""
-          ><button class="btn btn-outline btn-primary px-8 rounded-full">
-            Edit Profile
-          </button></a
-        >
+        {% if request.user == user %}
+        <a href="{% url 'update-user' %}"><button class="btn btn-outline btn-primary px-8 rounded-full">Edit Profile</button></a>
+        {% endif %}
       </div>
 
-      <div class="about-container space-y-2 p-8">
+      <div class="about-container space-y-2 p-2">
         <div class="uppercase font-semibold text- tracking-wide">
           <h3>About</h3>
         </div>
         <div class="text-sm opacity-60 leading-relaxed">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptatibus, quibusdam, voluptates, voluptas voluptatibus
-            voluptatibus, quibusdam voluptates voluptatibus. Lorem ipsum dolor
-            sit amet consectetur adipisicing elit. Quisquam voluptatibus,
-            quibusdam,
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatibus, quibusdam, voluptates, voluptas voluptatibus voluptatibus,
+            quibusdam voluptates voluptatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatibus, quibusdam,
           </p>
         </div>
       </div>
 
-      <div class="p-8 mt-8">
+      <div class="p-2 mt-8">
         <div class="uppercase mb-6 font-semibold opacity-60 tracking-wide">
           <h3>Study room hosted by {{user.username}}</h3>
         </div>
@@ -52,6 +39,6 @@
       </div>
     </div>
   </div>
-  <div>{% include "base/activity_component.html" %}</div>
+  <div class="hidden lg:block">{% include "base/activity_component.html" %}</div>
   {% endblock %}
 </div>

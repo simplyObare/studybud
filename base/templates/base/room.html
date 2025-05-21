@@ -1,25 +1,12 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="room-container grid grid-cols-1 lg:grid-cols-[3fr_1fr] p-4 gap-8">
+<div class="room-container grid grid-cols-1 lg:grid-cols-[3fr_1fr] p-2 md:p-4 gap-8">
   <div class="bg-base-100">
-    <div
-      class="bg-primary uppercase text-primary-content rounded-t-lg h-10 p-4 flex items-center justify-between font-semibold"
-    >
+    <div class="bg-primary uppercase text-primary-content rounded-t-lg h-10 p-4 flex items-center justify-between font-semibold">
       <div class="flex items-center gap-2">
         <a href="{% url 'home' %}" class="tooltip" data-tip="Go Home">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="size-5 h-8"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
-            />
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
           </svg>
         </a>
         <h3>Study Room</h3>
@@ -28,19 +15,8 @@
       <div>
         {% if room.host == request.user %}
         <div class="flex items-center gap-5">
-          <a
-            href="{% url 'update-room' room.id %}"
-            class="tooltip"
-            data-tip="Edit Room"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
+          <a href="{% url 'update-room' room.id %}" class="tooltip" data-tip="Edit Room">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -49,19 +25,8 @@
             </svg>
           </a>
 
-          <a
-            href="{% url 'delete-room' room.id %}"
-            class="tooltip hover:text-error"
-            data-tip="Delete Room"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
+          <a href="{% url 'delete-room' room.id %}" class="tooltip hover:text-error" data-tip="Delete Room">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -75,31 +40,18 @@
     </div>
 
     <div class="p-6 mt-3">
-      <div class="flex items-center justify-between mb-4">
-        <h1 class="text-primary text-xl font-semibold tracking-wide">
-          {{room.name}}
-        </h1>
+      <div class="flex flex-col md:flex-row items-center justify-between mb-4">
+        <h1 class="text-primary text-xl font-semibold tracking-wide">{{room.name}}</h1>
 
-        <span class="text-xs opacity-60 font-semibold"
-          >{{room.created|timesince}} ago</span
-        >
+        <span class="text-xs opacity-60 font-semibold">{{room.created|timesince}} ago</span>
       </div>
 
       <div class="grid grid-cols-1 gap-3">
-        <span class="uppercase opacity-60 font-semibold text-xs"
-          >hosted by</span
-        >
-        <a
-          href="{% url 'user-profile' room.host.id %}"
-          class="flex items-center gap-4 mb-6"
-        >
+        <span class="uppercase opacity-60 font-semibold text-xs">hosted by</span>
+        <a href="{% url 'user-profile' room.host.id %}" class="flex items-center gap-4 mb-6">
           <div class="avatar">
-            <div
-              class="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2"
-            >
-              <img
-                src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-              />
+            <div class="ring-primary ring-offset-base-100 w-10 rounded-full ring-2 ring-offset-2">
+              <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
             </div>
           </div>
 
@@ -111,55 +63,29 @@
         <p>{{room.description}}</p>
       </div>
 
-      <div
-        class="badge badge-soft mb-4 px-6 py-4 rounded-full badge-primary mt-4"
-      >
-        {{room.topic.name}}
-      </div>
+      <div class="badge badge-soft mb-4 px-6 py-4 rounded-full badge-primary mt-4">{{room.topic.name}}</div>
 
       <div class="comment-wrapper bg-base-300 rounded-lg p-6">
-        <div
-          class="comment-list grid grid-cols-1 gap-4 p-2 overflow-scroll overflow-y-auto max-h-[calc(80vh-150px)]"
-        >
+        <div class="comment-list grid grid-cols-1 gap-4 overflow-scroll overflow-y-auto max-h-[calc(80vh-150px)]">
           {% for message in room_messages %}
-          <div class="message m-4 p4">
+          <div class="message m-1 md:m-4">
             <div class="flex items-center justify-between mb-1">
-              <a
-                href="{% url 'user-profile' message.user.id %}"
-                class="flex items-center gap-3"
-              >
+              <a href="{% url 'user-profile' message.user.id %}" class="flex items-center gap-3">
                 <div class="avatar">
-                  <div
-                    class="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2"
-                  >
-                    <img
-                      src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-                    />
+                  <div class="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2">
+                    <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
                   </div>
                 </div>
 
-                <small class="flex items-center gap-2">
+                <small class="flex flex-col md:flex-row items-center gap-2">
                   <span class="text-primary">@{{ message.user.username }}</span>
-                  <span class="opacity-60">
-                    {{ message.created|timesince|truncatewords:2 }} ago
-                  </span>
+                  <span class="opacity-60"> {{ message.created|timesince|truncatewords:2 }} ago </span>
                 </small>
               </a>
 
               {% if request.user == message.user %}
-              <a
-                href="{% url 'delete-message' message.id %}"
-                class="tooltip hover:text-error"
-                data-tip="Delete Message"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="size-5"
-                >
+              <a href="{% url 'delete-message' message.id %}" class="tooltip hover:text-error" data-tip="Delete Message">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                   <path
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -170,34 +96,22 @@
               {% endif %}
             </div>
 
-            <small class="opacity-60 leading-relaxed mt-4">
-              {{ message.body }}
-            </small>
+            <small class="opacity-60 leading-relaxed mt-4"> {{ message.body }} </small>
           </div>
           {% endfor %}
         </div>
 
         {% if request.user.is_authenticated %}
-        <div class="comment-form p-4 mt-2 flex justify-center">
+        <div class="comment-form flex justify-center pt-6">
           <form action="" method="post">
             {% csrf_token %}
             <div class="join">
               <div>
-                <label
-                  class="input join-item bg-primary-content font-semibold text-primary shadow w-full sm:w-72 md:w-96 h-12"
-                >
-                  <input
-                    type="text"
-                    name="body"
-                    placeholder="Write your message here..."
-                  />
+                <label class="input join-item bg-primary-content font-semibold text-primary shadow w-full md:w-lg h-12">
+                  <input type="text" name="body" placeholder="Write your message here..." />
                 </label>
               </div>
-              <button
-                class="btn btn-primary join-item h-12 w-full sm:w-20 md:w-24"
-              >
-                Send
-              </button>
+              <button class="btn btn-primary join-item h-12">Send</button>
             </div>
           </form>
         </div>
@@ -207,34 +121,24 @@
   </div>
 
   <div class="bg-base-100">
-    <div
-      class="bg-primary text-primary-content rounded-t-lg h-10 p-4 flex items-center font-semibold"
-    >
+    <div class="bg-primary text-primary-content rounded-t-lg h-10 p-4 flex items-center font-semibold">
       <h3>Participants</h3>
       <span class="ml-2">({{room.participants.count}} Joined)</span>
     </div>
-    <div
-      class="grid grid-cols-1 gap-4 p-2 overflow-scroll overflow-y-auto max-h-screen"
-    >
+    <div class="grid grid-cols-1 gap-4 p-2 overflow-scroll overflow-y-auto max-h-screen">
       <div class="mt-4 p-4">
         {% for participant in participants %}
         <div class="flex items-center gap-4 mb-6">
           <div class="avatar">
-            <div
-              class="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2"
-            >
-              <img
-                src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp"
-              />
+            <div class="ring-primary ring-offset-base-100 w-8 rounded-full ring-2 ring-offset-2">
+              <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
             </div>
           </div>
 
           <div class="text-xs">
             <h2 class="opacity-60 font-semibold">Full Name</h2>
             <h3 class="text-primary font-semibold">
-              <a href="{% url 'user-profile' participant.id %}"
-                >@{{participant.username}}</a
-              >
+              <a href="{% url 'user-profile' participant.id %}">@{{participant.username}}</a>
             </h3>
           </div>
         </div>

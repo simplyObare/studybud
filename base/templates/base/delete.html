@@ -1,12 +1,18 @@
 {% extends "base.html" %} {% block content %}
-<div>
-  <form action="" method="post">
-    {% csrf_token %}
-    <p>Are you sure you want to delete {{obj}}?</p>
-    <small>This action cannot be undone.</small>
+<div class="grid place-items-center">
+  <div class="card bg-neutral text-neutral-content w-96">
+    <form action="" method="post" class="card-body items-center text-center">
+      {% csrf_token %}
+      <h3 class="card-title">Are you sure you want to delete:</h3>
+      <p class="opacity-60 text-pretty">"{{obj}}..."</p>
+      <p>This action cannot be undone.</p>
 
-    <a href="{{request.META.HTTP_REFERER}}">Go back</a>
-    <button type="submit">Confirm</button>
-  </form>
+      <div class="card-actions mt-4 justify-end">
+        <a href="{{request.META.HTTP_REFERER}}" class="btn btn-soft btn-primary">Go back</a>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+      </div>
+    </form>
+  </div>
 </div>
+
 {% endblock %}

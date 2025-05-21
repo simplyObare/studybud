@@ -7,20 +7,22 @@
     <link rel="stylesheet" href="{% static 'css/src/output.css' %}" />
     <title>StudyBud</title>
   </head>
-  <body>
+  <body class='w-screen overflow-x-hidden grid place-items-center'>
     {% include "includes/navbar.html" %}
 
     <div>
       {% if messages %}
+      <div class='w-screen bg-error text-white text-center py-2'>
         <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-      </ul>
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
       {% endif %}
     </div>
 
-    <div class='container mx-4 my-10'>
+    <div class='container py-10'>
       {% block content %}{% endblock %}
     </div>
   </body>

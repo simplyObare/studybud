@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Room, Topic, Message
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -183,3 +183,31 @@ def deleteMessage(request, pk):
         message.delete()
         return redirect("home")
     return render(request, "base/delete.html", {"obj": message})
+
+
+@login_required(login_url="login")
+def updateUser(request):
+    user = request.user
+    form = UserForm(instance=user)
+
+    if request.method == "POST":
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("user-profile", pk=user.id)
+
+    context = {"form": form}
+    return render(request, "base/update_user.html", context)
+
+
+def topicsPage(request):
+    q = request.GET.get("q") if request.GET.get("q") != None else ""
+    topics = Topic.objects.filter(name__icontains=q)
+
+    return render(request, "base/topic.html", {"topics": topics})
+
+
+def activityPage(request):
+    room_messages = Message.objects.all()
+    context = {"room_messages": room_messages}
+    return render(request, "base/activity.html", context)

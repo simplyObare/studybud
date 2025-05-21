@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+<div class="grid place-items-center">
+  <div class="bg-base-100 min-w-[16rem] sm:min-w-[20rem] lg:min-w-[24rem] rounded-lg shadow-lg">
+    <div class="bg-primary uppercase text-primary-content rounded-t-lg h-10 p-6 flex items-center justify-between font-semibold">
+      <div class="flex items-center gap-2">
+        <a href="{% url 'home' %}" class="tooltip" data-tip="Go Home">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </a>
+        <h3>Browse Topics</h3>
+      </div>
+    </div>
+
+    <div class='mt-6 p-4'>
+      <div>
+         <form action="" method="get"">
+            <label class="input border border-primary text-primary">
+              <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none" stroke="currentColor">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+              <input type="text" name="q" placeholder="Search topics..." class="w-full" />
+            </label>
+          </form>
+      </div>
+   
+      <div>
+        <div class="p-4 pb-2 text-lg font-semibold font-sans opacity-60 tracking-wide">
+          <h3>Browse Topics</h3>
+        </div>
+
+         <ul class="list bg-base-100 overflow-scroll overflow-y-auto h-[calc(100vh-20em)]">
+                      
+            <li class="list-row">
+              <div class="list-col-grow">
+                <div class="text-xs hover:text-primary font-semibold opacity-60">
+                  <a href="{% url 'home' %}">All</a>
+                </div>
+              </div>
+            </li>
+          
+            {% for topic in topics %}
+            <li class="list-row">
+              <div class="list-col-grow">
+                <div class="text-xs hover:text-primary font-semibold opacity-60">
+                  <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
