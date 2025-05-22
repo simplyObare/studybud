@@ -7,12 +7,12 @@
       <div class="avatar-main-container grid grid-cols-1 gap-3 p-8 place-items-center">
         <div class="avatar">
           <div class="ring-primary ring-offset-base-100 w-24 rounded-full ring-2 ring-offset-2">
-            <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
+            <img src="{{user.avatar.url}}" placeholder="avatar" />
           </div>
         </div>
 
-        <h1>Full Name</h1>
-        <h2 class="text-primary">@{{user.username}}</h2>
+        <h1 class="font-semibold">{{user.name}}</h1>
+        <h2 class="text-primary font-semibold">@{{user.username}}</h2>
         {% if request.user == user %}
         <a href="{% url 'update-user' %}"><button class="btn btn-outline btn-primary px-8 rounded-full">Edit Profile</button></a>
         {% endif %}
@@ -23,10 +23,7 @@
           <h3>About</h3>
         </div>
         <div class="text-sm opacity-60 leading-relaxed">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatibus, quibusdam, voluptates, voluptas voluptatibus voluptatibus,
-            quibusdam voluptates voluptatibus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatibus, quibusdam,
-          </p>
+          <p>{{user.bio}}</p>
         </div>
       </div>
 
