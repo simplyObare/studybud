@@ -16,14 +16,15 @@
   </div>
   <div class="flex gap-2">
     <form action="{% url 'home' %}" method="get" class="hidden md:flex">
-      <input type="text" name="q" placeholder="Search rooms..." class="input input-bordered bg-primary-content text-primary w-24 md:w-auto" />
+      <input type="text" name="q" placeholder="Search rooms..." class="input input-bordered bg-primary-content text-primary w-full md:w-auto" />
     </form>
     {% if request.user.is_authenticated %}
     <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+      <div tabindex="0" role="button" class="btn btn-ghost rounded-btn font-semibold avatar">
         <div class="w-10 rounded-full">
           <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
         </div>
+        <p>@{{user.username}}</p>
       </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content bg-primary text-primary-content rounded-box z-1 mt-3 w-52 p-2 shadow">
         <li>
@@ -44,22 +45,19 @@
       </ul>
     </div>
     {% else %}
-    <div class="dropdown dropdown-end">
-      <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component" src="{% static 'images/no-avatar.jpg' %}" />
-        </div>
-      </div>
-      <ul tabindex="0" class="menu menu-sm dropdown-content bg-primary text-primary-content rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li>
-          {% if request.user.is_authenticated %}
-          <a href="{% url 'logout' %}">Logout</a>
-
-          {% else %}
-          <a href="{% url 'login' %}">Login</a>
-          {% endif %}
-        </li>
-      </ul>
+    <div>
+      <a href="{% url 'login' %}" class="btn btn-ghost btn-sm rounded-btn font-semibold">
+        <span class="hidden sm:block md:block lg:block">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 w-8 h-8">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+            />
+          </svg>
+        </span>
+        <p class="text-lg">Login</p>
+      </a>
     </div>
     {% endif %}
   </div>
